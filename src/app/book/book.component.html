@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-8">
+    <h5>Có {{bookList.length}} cuốn sách</h5>
+  </div>
+  <div class="col-4 text-right">
+    <a [routerLink]="['/book', 'add']" class="btn btn-outline-dark">Thêm sách mới</a>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên sách</th>
+      <th scope="col">Tác giả</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of bookList; index as i">
+      <th scope="row">{{i + 1}}</th>
+      <td><a [routerLink]="[ '/book', book.id, 'show' ]">{{book.title}}</a></td>
+      <td>{{book.author}}</td>
+      <td><a [routerLink]="[ '/book', book.id, 'edit' ]">Sửa</a></td>
+    </tr>
+  </tbody>
+</table>
