@@ -19,20 +19,37 @@ export class BookEditComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.bookForm= this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      author: ['', [Validators.required, Validators.minLength(10)]]
+    this.bookForm = this.fb.group({
+      title: ['', Validators.required],
+      author: ['', Validators.required],
+      description: ['', Validators.required]
     });
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.bookService.getPostById(id).subscribe(
       next => {
         this.book = next;
-        this.bookForm.patchValue(this.book);
+        this.bookForm.patchValue(this.book)
       },
       error => {
-        console.log(error);
-        this.book = null;
+        console.log(error)
+        this.book = null
       }
-    );
+    )
+  }
+
+  onSubmit() {
+    if (this.bookForm.valid) {
+      const { value } = this.bookForm;
+      const data = {
+        ...this.book,
+        ...value
+      };
+      this.bookService.updateBook(data).subscribe(
+        next => {
+          this.router.navigate(['/book']);
+        },
+        error => console.log(error)
+      );
+    }
   }
 }

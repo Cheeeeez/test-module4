@@ -21,7 +21,9 @@
       <th scope="row">{{i + 1}}</th>
       <td><a [routerLink]="[ '/book', book.id, 'show' ]">{{book.title}}</a></td>
       <td>{{book.author}}</td>
-      <td><a [routerLink]="[ '/book', book.id, 'edit' ]">Sửa</a></td>
+      <td><a [routerLink]="[ '/book', book.id, 'edit' ]" class="mr-2">Sửa</a>
+        <a [routerLink]="[ '/book', book.id, 'delete' ]">Xóa</a>
+      </td>
     </tr>
   </tbody>
 </table>
